@@ -14,8 +14,6 @@ export const validateFormInput = (values: unknown) => {
   return parsedData;
 };
 
-// TESTS
-
 it('Should fail if you pass a phone number with too few characters', async () => {
   expect(() =>
     validateFormInput({

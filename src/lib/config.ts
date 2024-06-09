@@ -9,6 +9,5 @@ const config = {
   GITHUB_SECRET: process.env.GITHUB_SECRET!,
   APP_ENV: process.env.APP_ENV!,
 };
-// console.log(config);
 
 export default config;

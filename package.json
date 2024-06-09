@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "drizzle:generate": "drizzle-kit generate:pg",
+    "drizzle:push": "drizzle-kit push",
+    "drizzle:seed": "node --loader esbuild-register/loader -r esbuild-register ./src/db/seed.ts"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.1.0",
