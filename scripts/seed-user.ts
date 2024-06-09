@@ -1,8 +1,7 @@
-import { db } from '@/lib/db';
+import { db, pool } from '@/lib/db';
 import { users } from '@/lib/schema';
 import { faker } from '@faker-js/faker';
 
-import { Pool } from 'pg';
 import { TNewUser } from './types';
 async function main() {
   for (let i = 0; i < 100; i++) {
@@ -21,7 +20,7 @@ async function main() {
 
     await db.insert(users).values(newUser).execute();
   }
-  const pool = new Pool();
+
   pool.end();
 }
 
