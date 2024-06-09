@@ -1,7 +1,8 @@
 import { db } from '@/lib/db';
 import { users } from '@/lib/schema';
 import { faker } from '@faker-js/faker';
-import { Pool } from '@vercel/postgres';
+
+import { Pool } from 'pg';
 import { TNewUser } from './types';
 async function main() {
   for (let i = 0; i < 100; i++) {
@@ -12,16 +13,16 @@ async function main() {
 
     const newUser: TNewUser = {
       id: faker.string.uuid(),
-      firstName,
-      lastName,
-      email,
-      image,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      image: image,
     };
 
     await db.insert(users).values(newUser).execute();
-    const pool = new Pool();
-    pool.end();
   }
+  const pool = new Pool();
+  pool.end();
 }
 
 main();
