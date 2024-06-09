@@ -1,13 +1,5 @@
-import config from '@/lib/config';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { Pool } from 'pg';
+import { sql } from '@vercel/postgres';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
 import * as schema from './schema';
 
-export const pool = new Pool({
-  connectionString: config.POSTGRES_URL,
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-});
-
-export const db = drizzle(pool as any, { schema });
+export const db = drizzle(sql, { schema });
