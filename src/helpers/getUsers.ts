@@ -10,7 +10,7 @@ export const getUsers = async (
   offset = 0
 ) => {
   const q = '%' + query + '%';
-  console.log('query', q);
+
   try {
     const results = await db.query.users
       .findMany({
@@ -21,7 +21,7 @@ export const getUsers = async (
           ilike(users.name, q),
           ilike(users.firstName, q),
           ilike(users.lastName, q),
-          ilike(users.email, 'Ricardo57@gmail.com')
+          ilike(users.email, q)
         ),
       })
       .execute();
