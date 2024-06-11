@@ -7,9 +7,10 @@ export type TUsers = typeof users.$inferInsert;
 export const getUsers = async (
   query = 'Software engineer',
   limit = 10,
-  offset = 1
+  offset = 0
 ) => {
   const q = '%' + query + '%';
+  console.log('query', q);
   try {
     const results = await db.query.users
       .findMany({
@@ -20,11 +21,11 @@ export const getUsers = async (
           ilike(users.name, q),
           ilike(users.firstName, q),
           ilike(users.lastName, q),
-          ilike(users.email, q)
+          ilike(users.email, 'Ricardo57@gmail.com')
         ),
       })
       .execute();
-
+    console.log(results);
     const totalCount = await db.select({ values: count() }).from(users);
     return {
       data: results,
