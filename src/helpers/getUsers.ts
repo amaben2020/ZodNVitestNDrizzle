@@ -1,13 +1,27 @@
 import { db } from '@/lib/db';
 import { users } from '@/lib/schema';
-import { count } from 'drizzle-orm';
+import { count, ilike, or } from 'drizzle-orm';
 
-export const getUsers = async (limit = 10, offset = 1) => {
+export type TUsers = typeof users.$inferInsert;
+
+export const getUsers = async (
+  query = 'Software engineer',
+  limit = 10,
+  offset = 1
+) => {
+  const q = '%' + query + '%';
   try {
     const results = await db.query.users
       .findMany({
         limit,
         offset,
+        where: or(
+          ilike(users.jobTitle, q),
+          ilike(users.name, q),
+          ilike(users.firstName, q),
+          ilike(users.lastName, q),
+          ilike(users.email, q)
+        ),
       })
       .execute();
 

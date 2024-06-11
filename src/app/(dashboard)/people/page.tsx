@@ -2,6 +2,7 @@ import { getUsers } from '@/helpers/getUsers';
 
 const page = async () => {
   const users = await getUsers();
+
   return (
     <div className="p-10 max-w-screen-xl">
       <div className="flex justify-between items-center gap-4 flex-wrap">
