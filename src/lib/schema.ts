@@ -33,7 +33,7 @@ export const skills = pgTable('skills', {
   name: text('name').notNull().unique(),
 });
 
-// the many to many table for users and skills
+// the many to many table for users and skills. This join table simply takes in the userId and skillId and the rating of the user for that skill.
 export const usersToSkills = pgTable(
   'users_to_skill',
   {
