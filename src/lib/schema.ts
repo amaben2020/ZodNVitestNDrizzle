@@ -56,11 +56,11 @@ export const skillsRelations = relations(skills, ({ many }) => ({
 
 export const usersToSkillsRelations = relations(users, ({ one }) => ({
   skill: one(skills, {
-    fields: [usersToSkills.skillId],
+    fields: [usersToSkills.skillId as any],
     references: [skills.id],
   }),
   user: one(users, {
-    fields: [usersToSkills.userId],
+    fields: [usersToSkills.userId as any],
     references: [users.id],
   }),
 }));
