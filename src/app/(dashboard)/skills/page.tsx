@@ -13,7 +13,7 @@ async function getSkills() {
     .leftJoin(usersToSkills, eq(skillsSchema.id, usersToSkills.skillId))
     .groupBy(skillsSchema.id, skillsSchema.name)
     .execute();
-
+  console.log('skills', skills);
   return skills;
 }
 

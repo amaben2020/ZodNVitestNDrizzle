@@ -12,6 +12,7 @@ async function main() {
 
   for (let skill of skills) {
     for (let user of users) {
+      if (Math.random() < 0.5) continue;
       const rating = Math.floor(Math.random() * 5) + 1;
       await db.insert(usersToSkills).values({
         userId: user.id,
