@@ -1,7 +1,18 @@
 import { db } from '@/lib/db';
+import { skills as skillsSchema, usersToSkills } from '@/lib/schema';
+import { eq, sql } from 'drizzle-orm';
 
 async function getSkills() {
-  const skills = await db.query.skills.findMany();
+  const skills = await db
+    .select({
+      id: skillsSchema.id,
+      name: skillsSchema.name,
+      count: sql<number>`count(${usersToSkills.userId})`,
+    })
+    .from(skillsSchema)
+    .leftJoin(usersToSkills, eq(skillsSchema.id, usersToSkills.skillId))
+    .groupBy(skillsSchema.id, skillsSchema.name)
+    .execute();
 
   return skills;
 }
@@ -14,7 +25,9 @@ const page = async () => {
       {skills.map((skill) => {
         return (
           <div key={skill.id}>
-            <p className="text-white">{skill.name}</p>
+            <p className="text-white">
+              {skill.name} - {skill.count}
+            </p>
           </div>
         );
       })}
