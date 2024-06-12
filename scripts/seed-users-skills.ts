@@ -4,6 +4,7 @@ import {
   users as usersSchema,
   usersToSkills,
 } from '@/lib/schema';
+import { TNewUserSkills } from './types';
 
 async function main() {
   const users = await db.select().from(usersSchema).execute();
@@ -16,7 +17,7 @@ async function main() {
         userId: user.id,
         skillId: skill.id,
         rating: rating,
-      });
+      } satisfies TNewUserSkills);
     }
   }
   pool.end();
