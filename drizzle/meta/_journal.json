@@ -22,6 +22,13 @@
       "when": 1717943779914,
       "tag": "0002_flippant_roulette",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1718218324785,
+      "tag": "0003_flippant_slipstream",
+      "breakpoints": true
     }
   ]
 }
