@@ -33,6 +33,7 @@ export const skills = pgTable('skills', {
   name: text('name').notNull().unique(),
 });
 
+// the many to many table for users and skills
 export const usersToSkills = pgTable(
   'users_to_skill',
   {

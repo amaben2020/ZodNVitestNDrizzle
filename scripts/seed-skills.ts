@@ -5,10 +5,14 @@ import { skills as skillsSchema } from '@/lib/schema';
 async function main() {
   try {
     for (const skill of skills) {
-      await db.insert(skillsSchema).values({
-        id: crypto.randomUUID(),
-        name: skill,
-      });
+      await db
+        .insert(skillsSchema)
+        .values({
+          id: crypto.randomUUID(),
+          name: skill,
+        })
+        .onConflictDoNothing()
+        .execute();
     }
     pool.end();
   } catch (error) {
