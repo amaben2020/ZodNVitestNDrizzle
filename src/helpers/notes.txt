@@ -34,3 +34,8 @@ ORDER BY "user".first_name DESC
 4.
 INSERT INTO "order"("item_name","customer_id")
 VALUES ('iPhone 15pro max', '1');
+5. Join
+SELECT first_name, last_name, email
+	 FROM customer
+	LEFT JOIN "order"
+	ON customer.id = "order".customer_id
