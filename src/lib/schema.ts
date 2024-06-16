@@ -84,6 +84,8 @@ export const orders = pgTable('order', {
     .references(() => customers.id),
 });
 
+export type TOrders = typeof orders.$inferInsert;
+
 // Define relationships
 export const customersRelations = relations(customers, ({ many }) => ({
   orders: many(orders),
@@ -95,45 +97,6 @@ export const ordersRelations = relations(orders, ({ one }) => ({
     references: [customers.id],
   }),
 }));
-
-// export const customers = pgTable('customer', {
-//   id: serial('id').primaryKey(),
-//   firstName: text('first_name'),
-//   lastName: text('last_name'),
-//   email: text('email').notNull().unique(),
-// });
-
-// export const orders = pgTable('order', {
-//   id: serial('id').primaryKey(),
-//   item: text('item_name'),
-//   customerId: integer('customer_id')
-//     .notNull()
-//     .references(() => customers.id),
-// });
-
-// export const customersRelations = relations(customers, ({ many }) => ({
-//   orders: many(orders),
-// }));
-
-// export const ordersRelations = relations(orders, ({ one }) => ({
-//   customer: one(customers, {
-//     fields: [orders.customerId],
-//     references: [customers.id],
-//   }),
-// }));
-
-// export const comments = pgTable('comments', {
-//   id: serial('id').primaryKey(),
-//   text: text('text'),
-//   authorId: integer('author_id'),
-//   postId: integer('post_id'),
-// });
-// export const commentsRelations = relations(comments, ({ one }) => ({
-//   post: one(posts, {
-//     fields: [comments.postId],
-//     references: [posts.id],
-//   }),
-// }));
 
 // export const accounts = pgTable(
 //   'account',

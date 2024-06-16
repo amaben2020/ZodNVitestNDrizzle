@@ -1,5 +1,5 @@
+import { getOrdersAndCustomers } from '@/helpers/getOrdersAndCustomers';
 import { parseAvailabilityAndOverridesHelper } from '@/helpers/parseAvailabilityAndOverrides';
-import { db } from '@/lib/db';
 import { providerAvailability } from '@/mock/availability';
 
 export default async function Home() {
@@ -8,11 +8,7 @@ export default async function Home() {
 
   // const data = await getPlanets();
 
-  const data = await db.query.orders.findMany({
-    with: {
-      customer: true,
-    },
-  });
+  const data = await getOrdersAndCustomers();
 
   console.log('data', data);
   return (
