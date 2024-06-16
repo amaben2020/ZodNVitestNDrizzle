@@ -1,6 +1,7 @@
 import { db } from '@/lib/db';
 import { skills as skillsSchema, usersToSkills } from '@/lib/schema';
 import { eq, sql } from 'drizzle-orm';
+import Link from 'next/link';
 
 async function getSkills() {
   const skills = await db
@@ -13,7 +14,7 @@ async function getSkills() {
     .leftJoin(usersToSkills, eq(skillsSchema.id, usersToSkills.skillId))
     .groupBy(skillsSchema.id, skillsSchema.name)
     .execute();
-  console.log('skills', skills);
+
   return skills;
 }
 
@@ -24,11 +25,11 @@ const page = async () => {
       Skills
       {skills.map((skill) => {
         return (
-          <div key={skill.id}>
-            <p className="text-white">
+          <Link href={`/skills/${skill.id}`} key={skill.id}>
+            <p className="text-white border my-3 p-3">
               {skill.name} - {skill.count}
             </p>
-          </div>
+          </Link>
         );
       })}
     </div>

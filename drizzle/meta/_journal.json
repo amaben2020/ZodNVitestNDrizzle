@@ -29,6 +29,20 @@
       "when": 1718218324785,
       "tag": "0003_flippant_slipstream",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1718560429496,
+      "tag": "0004_blushing_the_executioner",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1718561134051,
+      "tag": "0005_minor_lord_tyger",
+      "breakpoints": true
     }
   ]
 }

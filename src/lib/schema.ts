@@ -3,6 +3,7 @@ import {
   integer,
   pgTable,
   primaryKey,
+  serial,
   text,
   timestamp,
 } from 'drizzle-orm/pg-core';
@@ -48,23 +49,62 @@ export const usersToSkills = pgTable(
   })
 );
 export const usersRelations = relations(users, ({ many }) => ({
-  usersToSkills: many(usersToSkills),
+  usersToUsersSkills: many(usersToSkills),
 }));
 
 export const skillsRelations = relations(skills, ({ many }) => ({
   skillsToUsersSkills: many(usersToSkills),
 }));
 
-export const usersToSkillsRelations = relations(users, ({ one }) => ({
+export const usersToSkillsRelations = relations(usersToSkills, ({ one }) => ({
   skill: one(skills, {
-    fields: [usersToSkills.skillId as any],
+    fields: [usersToSkills.skillId],
     references: [skills.id],
   }),
   user: one(users, {
-    fields: [usersToSkills.userId as any],
+    fields: [usersToSkills.userId],
     references: [users.id],
   }),
 }));
+
+// practice to be removed
+export const customers = pgTable('customer', {
+  id: serial('id').primaryKey(),
+  firstName: text('first_name'),
+  lastName: text('last_name'),
+  email: text('email'),
+});
+
+export const orders = pgTable('order', {
+  id: serial('id').primaryKey(),
+  item: text('item_name'),
+  customerId: integer('customer_id'),
+});
+
+export const customersRelations = relations(customers, ({ many }) => ({
+  orders: many(orders),
+}));
+
+export const ordersRelations = relations(orders, ({ one }) => ({
+  customer: one(customers, {
+    fields: [orders.customerId],
+    references: [customers.id],
+  }),
+  // comments: many(comments)
+}));
+
+// export const comments = pgTable('comments', {
+//   id: serial('id').primaryKey(),
+//   text: text('text'),
+//   authorId: integer('author_id'),
+//   postId: integer('post_id'),
+// });
+// export const commentsRelations = relations(comments, ({ one }) => ({
+//   post: one(posts, {
+//     fields: [comments.postId],
+//     references: [posts.id],
+//   }),
+// }));
 
 // export const accounts = pgTable(
 //   'account',

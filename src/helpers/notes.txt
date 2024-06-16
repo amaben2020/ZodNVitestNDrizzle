@@ -16,3 +16,21 @@
  .execute();
 
 similarity ranges from 0.1 - 0.9 based on the threshold required
+after installing pgtrgm which gives us similarity function
+1.
+select * from "user" where similarity(first_name, 'Ophelia_Okuneva') > 0.2;
+2.
+SELECT
+    email
+FROM
+     "user"
+3. putting user in quotes because its reserved in  postgres
+SELECT
+  "user".job_title, "user".email, "user".first_name
+FROM
+  "user"
+ORDER BY "user".first_name DESC
+
+4.
+INSERT INTO "order"("item_name","customer_id")
+VALUES ('iPhone 15pro max', '1');
