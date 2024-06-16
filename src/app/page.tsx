@@ -17,7 +17,7 @@ export default async function Home() {
   console.log('data', data);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {JSON.stringify(availability)}
+      {/* {JSON.stringify(availability)} */}
 
       {/* <h1> {JSON.stringify(renderSpaceName(data))} </h1> */}
 
