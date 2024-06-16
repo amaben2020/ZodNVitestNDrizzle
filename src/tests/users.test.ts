@@ -9,7 +9,7 @@ test('It should return correct users', async () => {
 });
 
 test('id property should always be present', async () => {
-  const data = await getUsers();
-  const dataIsAvaillable = Array.isArray(data) && data.length > 0;
-  expect(dataIsAvaillable && data[0]).toHaveProperty('id');
+  const user = await getUsers();
+
+  expect(user?.data).toHaveProperty('id');
 });

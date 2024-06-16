@@ -11,3 +11,15 @@ export async function validateSchema<T extends AnyZodObject>(
 
   return parsedDataResponse as z.infer<T>;
 }
+
+export const validateList = (data: any, key: string = 'data') => {
+  expect(data).toHaveProperty(key);
+  expect(Array.isArray(data[key])).toBeTruthy();
+};
+
+export const validationStatusCode = (
+  status: number,
+  expectedStatus: number = 200
+) => {
+  expect(status).toBe(expectedStatus);
+};

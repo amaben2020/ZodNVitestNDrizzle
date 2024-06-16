@@ -12,16 +12,19 @@ const jobTitleEnum = z.enum([
 
 export const userZodSchema = z.array(
   z.object({
-    id: z.string(),
-    name: z.string().nullable(),
-    email: z
-      .string()
-      .min(1, { message: 'This field has to be filled.' })
-      .email(),
-    emailVerified: z.boolean().nullable(),
-    image: z.string(),
-    firstName: z.string().nullable(),
-    lastName: z.string().nullable(),
-    jobTitle: jobTitleEnum,
+    data: z.object({
+      id: z.string(),
+      name: z.string().nullable(),
+      email: z
+        .string()
+        .min(1, { message: 'This field has to be filled.' })
+        .email(),
+      emailVerified: z.boolean().nullable(),
+      image: z.string(),
+      firstName: z.string().nullable(),
+      lastName: z.string().nullable(),
+      jobTitle: jobTitleEnum,
+    }),
+    totalItems: z.number(),
   })
 );
