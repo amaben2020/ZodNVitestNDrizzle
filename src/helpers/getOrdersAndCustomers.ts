@@ -1,9 +1,22 @@
 import { db } from '@/lib/db';
-import { TOrders } from '@/lib/schema';
+import { z } from 'zod';
 
-export const getOrdersAndCustomers = async (): Promise<
-  TOrders[] | undefined
-> => {
+const CustomerSchema = z.object({
+  id: z.number(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().email(),
+});
+export const validateOrdersDataSchema = z.array(
+  z.object({
+    orderId: z.number(),
+    item: z.string().nullable(),
+    cusId: z.number(),
+    customer: CustomerSchema,
+  })
+);
+
+export const getOrdersAndCustomers = async () => {
   try {
     const data = await db.query.orders.findMany({
       with: {
