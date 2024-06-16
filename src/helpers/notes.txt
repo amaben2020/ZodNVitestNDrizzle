@@ -39,3 +39,27 @@ SELECT first_name, last_name, email
 	 FROM customer
 	LEFT JOIN "order"
 	ON customer.id = "order".customer_id
+
+  6.
+  -- Drop existing tables
+DROP TABLE IF EXISTS "order";
+DROP TABLE IF EXISTS "customer";
+
+-- Recreate the tables
+CREATE TABLE customer (
+  id SERIAL PRIMARY KEY,
+  first_name TEXT,
+  last_name TEXT,
+  email TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE "order" (
+  id SERIAL PRIMARY KEY,
+  item_name TEXT,
+  customer_id INTEGER NOT NULL REFERENCES customer(id)
+);
+
+7. Explicit Joins
+SELECT customer.first_name, customer.last_name, customer.email, "order".item_name
+FROM customer
+LEFT JOIN "order" ON customer.id = CAST("order".customer_id AS INTEGER);

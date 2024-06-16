@@ -72,26 +72,55 @@ export const customers = pgTable('customer', {
   id: serial('id').primaryKey(),
   firstName: text('first_name'),
   lastName: text('last_name'),
-  email: text('email'),
+  email: text('email').notNull().unique(),
 });
 
+// Define the orders table
 export const orders = pgTable('order', {
-  id: serial('id').primaryKey(),
+  orderId: serial('id').primaryKey(),
   item: text('item_name'),
-  customerId: integer('customer_id'),
+  cusId: integer('customer_id')
+    .notNull()
+    .references(() => customers.id),
 });
 
+// Define relationships
 export const customersRelations = relations(customers, ({ many }) => ({
   orders: many(orders),
 }));
 
 export const ordersRelations = relations(orders, ({ one }) => ({
   customer: one(customers, {
-    fields: [orders.customerId],
+    fields: [orders.cusId],
     references: [customers.id],
   }),
-  // comments: many(comments)
 }));
+
+// export const customers = pgTable('customer', {
+//   id: serial('id').primaryKey(),
+//   firstName: text('first_name'),
+//   lastName: text('last_name'),
+//   email: text('email').notNull().unique(),
+// });
+
+// export const orders = pgTable('order', {
+//   id: serial('id').primaryKey(),
+//   item: text('item_name'),
+//   customerId: integer('customer_id')
+//     .notNull()
+//     .references(() => customers.id),
+// });
+
+// export const customersRelations = relations(customers, ({ many }) => ({
+//   orders: many(orders),
+// }));
+
+// export const ordersRelations = relations(orders, ({ one }) => ({
+//   customer: one(customers, {
+//     fields: [orders.customerId],
+//     references: [customers.id],
+//   }),
+// }));
 
 // export const comments = pgTable('comments', {
 //   id: serial('id').primaryKey(),
