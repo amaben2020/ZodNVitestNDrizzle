@@ -18,7 +18,7 @@ export default async function Home() {
       {/* <h1> {JSON.stringify(renderSpaceName(data))} </h1> */}
 
       {/* <LoginBtn /> */}
-      {JSON.stringify(data)}
+      {/* {JSON.stringify(data)} */}
     </main>
   );
 }

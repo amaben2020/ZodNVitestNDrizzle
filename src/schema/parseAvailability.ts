@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { userZodSchema } from './usersZodSchema';
 
 const repeatedItems = {
   id: z.number(),
@@ -7,7 +8,7 @@ const repeatedItems = {
   updated_by: z.string().nullable(),
   updated_at: z.string().nullable(),
 };
-
+// we could spread the actual zod object here using z.shape
 export const parseAvailability = z.object({
   ...repeatedItems,
   provider_id: z.number(),
@@ -36,4 +37,14 @@ export const providerAvailabilityAndOverrides = z.object({
   friday: z.array(parseAvailability),
   saturday: z.array(parseAvailability),
   sunday: z.array(parseAvailability),
+});
+
+const baseUserData = z.object({
+  lastname: z.string().min(2).max(50),
+});
+
+export const userInfo = z.object({
+  ...baseUserData.shape,
+  email: z.string().email(),
+  firstName: z.string().includes('Ben'),
 });

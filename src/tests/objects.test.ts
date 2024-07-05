@@ -4,6 +4,15 @@ const userData = {
   name: 'Ben',
   age: 32,
 };
+
+const testPromise = new Promise((resolve, reject) => {
+  if (true) {
+    setTimeout(() => {
+      resolve(true);
+    }, 400);
+  }
+});
+
 describe('It should test 10 object methods', () => {
   it('should return true if the object has property', () => {
     expect(userData).toHaveProperty('age');

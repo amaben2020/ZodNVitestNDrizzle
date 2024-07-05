@@ -7,3 +7,5 @@ npm run drizzle:generate
 npm run drizzle:push
 
 seeding:npx tsx scripts/update-job-title.ts
+
+vitest ui: npx vitest --ui

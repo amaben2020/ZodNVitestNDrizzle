@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 // TODO: use table to render the users here
-
 const page = async ({ searchParams }: { searchParams: { query: string } }) => {
   const users = await getUsers(searchParams.query);
 
